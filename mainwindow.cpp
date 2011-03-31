@@ -42,7 +42,12 @@ void MainWindow::start() {
 
 void MainWindow::play() {
     buffer_->open(ThreadSafeBuffer::ReadOnly);
-    player_->setMedia(QMediaContent(), buffer_);
+    QMediaResource* res = new QMediaResource();
+    res->setAudioBitRate(16);
+    res->setSampleRate(441000);
+    res->setDataSize(39379580);
+    QMediaContent* content = new QMediaContent(*res);
+    player_->setMedia(*content, buffer_);
     player_->play();
 }
 
